@@ -1,6 +1,6 @@
 window.onload = function(){
   var thermostat = new Thermostat;
-  
+
   var temperature = $('#temp-text');
   var up = $('button.up-btn');
   var down = $('button.down-btn');
@@ -17,11 +17,11 @@ window.onload = function(){
   });
 
   reset.on('click', function(){
-    upButton();
+    resetButton();
   });
 
   switchBtn.on('click', function(){
-    upButton();
+    switchButton();
   });
 
 
@@ -41,6 +41,16 @@ window.onload = function(){
     setUsageColour();
   };
 
+  resetButton = function() {
+    thermostat.resetTemp();
+    setTemperature();
+    setUsageColour();
+  }
+
+  switchButton = function() {
+    thermostat.switchSavingMode();
+  }
+
   setUsageColour = function(){
     var usage = thermostat.energyUsage();
     if (usage === 'low-usage') {
@@ -57,6 +67,8 @@ window.onload = function(){
       cardClass.addClass('bg-danger')
     };
   };
+
+
 
   setUsageColour();
   setTemperature();

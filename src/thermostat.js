@@ -40,3 +40,7 @@ Thermostat.prototype.energyUsage = function() {
     return 'high-usage';
   };
 };
+
+Thermostat.prototype.switchSavingMode = function() {
+  this.savingMode = !this.savingMode
+};

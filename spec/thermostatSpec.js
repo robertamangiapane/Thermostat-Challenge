@@ -83,4 +83,11 @@ describe("Thermostat", function(){
 
   });
 
+  describe('switchSavingMode', function(){
+    it('switch the saving mode', function(){
+      thermostat.switchSavingMode()
+      expect(thermostat.savingMode).toEqual(false)
+    });
+  });
+
 });
