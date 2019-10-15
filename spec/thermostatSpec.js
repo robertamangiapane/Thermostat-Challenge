@@ -15,11 +15,19 @@ describe("Thermostat", function(){
       expect(thermostat.temp).toEqual(21)
     });
 
-    it('doesnt go above the maximum temperature', function() {
+    it('doesnt go above the maximum temperature when powerSaving is true', function() {
       for(i = 0; i < 100; i++) {
         thermostat.up();
       }
-      expect(thermostat.temp).toEqual(thermostat.max);
+      expect(thermostat.temp).toEqual(25);
+    });
+
+    it('doesnt go above the maximum temperature when powerSaving is false', function() {
+      thermostat.savingMode = false
+      for(i = 0; i < 100; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.temp).toEqual(32);
     });
 
   });

@@ -2,11 +2,10 @@ function Thermostat(temp = 20){
   this.temp = temp;
   this.min = 10
   this.savingMode = true
-  this.max = 25
 };
 
 Thermostat.prototype.up = function() {
-  if (this.temp >= this.max) { return null }
+  if (this.temp >= this._max()) { return null }
   this.temp += 1;
 };
 
@@ -18,4 +17,13 @@ Thermostat.prototype.down = function() {
 
 Thermostat.prototype.isSavingMode = function() {
   return this.savingMode
+};
+
+Thermostat.prototype._max = function () {
+  console.log(this.savingMode);
+  if (this.savingMode === true) {
+    return 25 
+  } else {
+    return 32
+  }
 };
