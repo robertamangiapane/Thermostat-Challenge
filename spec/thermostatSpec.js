@@ -24,6 +24,13 @@ describe("Thermostat", function(){
       expect(thermostat.temp).toEqual(19)
     });
 
+    it('doesnt go below the minimum temperature', function() {
+      for(i = 0; i < 100; i++) {
+        thermostat.down();
+      }
+      expect(thermostat.temp).toEqual(thermostat.min);
+    });
+
   });
 
 });
