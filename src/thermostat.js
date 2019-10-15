@@ -20,10 +20,13 @@ Thermostat.prototype.isSavingMode = function() {
 };
 
 Thermostat.prototype._max = function () {
-  console.log(this.savingMode);
   if (this.savingMode === true) {
-    return 25 
+    return 25
   } else {
     return 32
   }
 };
+
+Thermostat.prototype.resetTemp = function() {
+  this.temp = 20
+}

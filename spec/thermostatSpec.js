@@ -54,4 +54,11 @@ describe("Thermostat", function(){
     });
   });
 
+  describe("resetTemp", function(){
+    it('reset the temp to 20', function(){
+      thermostat.resetTemp()
+      expect(thermostat.temp).toEqual(20)
+    });
+  });
+
 });
