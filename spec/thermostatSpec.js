@@ -15,6 +15,13 @@ describe("Thermostat", function(){
       expect(thermostat.temp).toEqual(21)
     });
 
+    it('doesnt go above the maximum temperature', function() {
+      for(i = 0; i < 100; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.temp).toEqual(thermostat.max);
+    });
+
   });
 
   describe("down", function() {
@@ -31,6 +38,12 @@ describe("Thermostat", function(){
       expect(thermostat.temp).toEqual(thermostat.min);
     });
 
+  });
+
+  describe("isSavingMode", function(){
+    it('checks the savingMode', function(){
+      expect(thermostat.isSavingMode()).toEqual(true)
+    });
   });
 
 });
