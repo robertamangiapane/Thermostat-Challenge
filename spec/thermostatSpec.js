@@ -61,4 +61,26 @@ describe("Thermostat", function(){
     });
   });
 
+  describe('energyUsage', function(){
+
+    it('returns the current usage as medium', function(){
+      expect(thermostat.energyUsage()).toEqual("medium-usage");
+    });
+
+    it('returns the current usage as low', function(){
+      for(i = 0; i < 5; i++) {
+        thermostat.down()
+      }
+      expect(thermostat.energyUsage()).toEqual("low-usage");
+    });
+
+    it('returns the current usage as high', function(){
+      for(i = 0; i < 6; i++) {
+        thermostat.up()
+      }
+      expect(thermostat.energyUsage()).toEqual("high-usage");
+    });
+
+  });
+
 });
