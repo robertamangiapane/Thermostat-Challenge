@@ -8,16 +8,16 @@ describe("Thermostat", function(){
     expect(thermostat.temp).toEqual(20);
   });
 
-  describe("up", function() {
+  describe("increase", function() {
 
     it('increments the temp', function() {
-      thermostat.up();
+      thermostat.increase();
       expect(thermostat.temp).toEqual(21)
     });
 
     it('doesnt go above the maximum temperature when powerSaving is true', function() {
       for(i = 0; i < 100; i++) {
-        thermostat.up();
+        thermostat.increase();
       }
       expect(thermostat.temp).toEqual(25);
     });
@@ -25,23 +25,23 @@ describe("Thermostat", function(){
     it('doesnt go above the maximum temperature when powerSaving is false', function() {
       thermostat.savingMode = false
       for(i = 0; i < 100; i++) {
-        thermostat.up();
+        thermostat.increase();
       }
       expect(thermostat.temp).toEqual(32);
     });
 
   });
 
-  describe("down", function() {
+  describe("decrease", function() {
 
     it('descrease the temp', function() {
-      thermostat.down();
+      thermostat.decrease();
       expect(thermostat.temp).toEqual(19)
     });
 
     it('doesnt go below the minimum temperature', function() {
       for(i = 0; i < 100; i++) {
-        thermostat.down();
+        thermostat.decrease();
       }
       expect(thermostat.temp).toEqual(thermostat.min);
     });
@@ -69,14 +69,14 @@ describe("Thermostat", function(){
 
     it('returns the current usage as low', function(){
       for(i = 0; i < 5; i++) {
-        thermostat.down()
+        thermostat.decrease()
       }
       expect(thermostat.energyUsage()).toEqual("low-usage");
     });
 
     it('returns the current usage as high', function(){
       for(i = 0; i < 6; i++) {
-        thermostat.up()
+        thermostat.increase()
       }
       expect(thermostat.energyUsage()).toEqual("high-usage");
     });

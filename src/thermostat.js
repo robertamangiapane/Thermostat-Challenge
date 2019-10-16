@@ -1,16 +1,17 @@
-function Thermostat(temp = 20){
-  this.temp = temp;
+function Thermostat(){
+  this.temp = 20;
   this.min = 10
   this.savingMode = true
+  this.tempMax = this._max
 };
 
-Thermostat.prototype.up = function() {
+Thermostat.prototype.increase = function() {
   if (this.temp >= this._max()) { return null }
   this.temp += 1;
 };
 
 
-Thermostat.prototype.down = function() {
+Thermostat.prototype.decrease = function() {
   if (this.temp <= this.min) { return null }
   this.temp -= 1;
 };
@@ -43,4 +44,7 @@ Thermostat.prototype.energyUsage = function() {
 
 Thermostat.prototype.switchSavingMode = function() {
   this.savingMode = !this.savingMode
+  if (this.temp > this._max()) {
+    this.temp = this._max()
+  }
 };
