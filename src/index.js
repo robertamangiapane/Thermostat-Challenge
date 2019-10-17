@@ -1,5 +1,6 @@
 $( document ).ready(function() {
   thermostat = new Thermostat();
+  displayWeather('London')
 
   usageColour = function() {
     if (thermostat.energyUsage() === "medium-usage") {
@@ -58,5 +59,22 @@ $( document ).ready(function() {
       usageColour();
     }
   });
+
+  $('#select-city').submit(function(event) {
+    event.preventDefault();
+    var city = $('#current-city').val();
+    displayWeather(city);
+
+  });
+
+  function displayWeather(city) {
+    var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city;
+    var token = "&appid=5197ed8e832ba1cca4f7a3461daa9de9"
+    var units = "&units=metric"
+    $.get( url + token + units, function( data ) {
+      $( "#city" ).text( 'Current temperature in ' + city );
+      $( "#current-temperature" ).text( data.main.temp );
+    });
+  };
 
 });
