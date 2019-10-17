@@ -84,9 +84,54 @@ describe("Thermostat", function(){
   });
 
   describe('switchSavingMode', function(){
+
     it('switch the saving mode', function(){
       thermostat.switchSavingMode()
       expect(thermostat.savingMode).toEqual(false)
+    });
+
+    // it('put back the maximum when switch saving mode ON', function(){
+    //   thermostat.switchSavingMode()
+    //   for(i = 0; i < 13; i++) {
+    //     thermostat.increase()
+    //   }
+    //   expect(thermostat.temp).toEqual(32)
+    //   thermostat.switchSavingMode()
+    //   expect(thermostat.temp).toEqual(25)
+    // });
+
+    it('set temperature max when saving mode switched OFF with a temp of 25', function(){
+      for(i = 0; i < 5; i++) {
+        thermostat.increase()
+      }
+      thermostat.switchSavingMode()
+      expect(thermostat.temp).toEqual(25)
+    });
+
+    it('set temperature max when saving mode switched ON with a temp of 32', function(){
+      thermostat.switchSavingMode()
+      for(i = 0; i < 12; i++) {
+        thermostat.increase()
+      }
+      thermostat.switchSavingMode()
+      expect(thermostat.temp).toEqual(25)
+    });
+
+    it('set temperature max when saving mode switched OFF with a temp of 10', function(){
+      for(i = 0; i < 10; i++) {
+        thermostat.decrease()
+      }
+      thermostat.switchSavingMode()
+      expect(thermostat.temp).toEqual(10)
+    });
+
+    it('set temperature max when saving mode switched ON with a temp of 10', function(){
+      thermostat.switchSavingMode()
+      for(i = 0; i < 10; i++) {
+        thermostat.decrease()
+      }
+      thermostat.switchSavingMode()
+      expect(thermostat.temp).toEqual(10)
     });
   });
 
