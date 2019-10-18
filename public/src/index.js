@@ -15,7 +15,7 @@ $( document ).ready(function() {
     "snow": "13d.png",
     "fog": "50d.png",
     "mist": "50d.png"}
-  displayWeather('London')
+  loadSetting()
 
   usageColour = function() {
     if (thermostat.energyUsage() === "medium-usage") {
@@ -28,10 +28,6 @@ $( document ).ready(function() {
       return $("#text-temperature").removeClass("text-warning").addClass("text-danger");
     }
   };
-
-  $( "#temperature" ).text(thermostat.temp);
-  $("#power-saving-status").text("ON")
-  $("#saving-mode-on-btn").addClass("bg-info");
 
 
   $( "#increase-btn" ).click(function( event ) {
@@ -52,25 +48,15 @@ $( document ).ready(function() {
     usageColour();
   });
 
-  $( "#saving-mode-on-btn" ).click(function( event ) {
-    if (thermostat.savingMode === false) {
-      thermostat.switchSavingMode();
+  $( "#saving-mode-btn" ).click(function( event ) {
+    thermostat.switchSavingMode();
+    if (thermostat.savingMode) {
       $( "#temperature" ).text(thermostat.temp);
       $("#power-saving-status").text("ON");
-      $("#saving-mode-on-btn").addClass("bg-info");
-      $("#saving-mode-off-btn").removeClass("bg-info");
-      usageColour();
-    }
-  });
-
-  $( "#saving-mode-off-btn" ).click(function( event ) {
-    if (thermostat.savingMode === true) {
-      thermostat.switchSavingMode();
+    } else {
       $( "#temperature" ).text(thermostat._max())
       $( "#temperature" ).text(thermostat.temp);
       $("#power-saving-status").text("OFF");
-      $("#saving-mode-off-btn").addClass("bg-info");
-      $("#saving-mode-on-btn").removeClass("bg-info");
       usageColour();
     }
   });
@@ -102,5 +88,38 @@ $( document ).ready(function() {
       alert("Settings saved")
     })
   });
+
+  function applySettings(data) {
+    if (data.savingmode == 'false') {
+      $("#power-saving-status").text("OFF");
+      thermostat.switchSavingMode();
+    } else {
+      $("#power-saving-status").text("ON");
+    }
+    displayWeather(data.city)
+    $( "#temperature" ).text(data.temp);
+    thermostat.temp = parseInt(data.temp)
+    usageColour();
+  }
+
+  function applyDefault() {
+    displayWeather('London')
+    $("#temperature").text(thermostat.temp);
+    $("#power-saving-status").text("ON");
+  }
+
+  function loadSetting() {
+    $.get( "/", function(data) {
+      if (data) {
+        applySettings(data);
+      } else {
+        applyDefault()
+      }
+    }, "json")
+  }
+
+
+
+
 
 });
