@@ -9,9 +9,11 @@ $( document ).ready(function() {
     "shower rain": "09d.png",
     "rain": "10d.png",
     "moderate rain": "10d.png",
+    "light intensity shower rain": "10d.png",
     "light rain": "10d.png",
     "thunderstorm": "11d.png",
     "snow": "13d.png",
+    "fog": "50d.png",
     "mist": "50d.png"}
   displayWeather('London')
 
@@ -87,13 +89,18 @@ $( document ).ready(function() {
     $.get( url + token + units, function( data ) {
       var icon = weatherIcons[data.weather[0]['description']]
       var weather = (data.weather[0]['main'])
-      $( "#city" ).text( 'Current temperature in ' + city );
+      $( "#city" ).text( city );
       $( "#current-temperature" ).text( data.main.temp );
       $( "#main-weather" ).text( weather );
       $("#icons").attr("src", "http://openweathermap.org/img/wn/" + icon)
     });
   };
 
-
+  $( "#save-settings-btn" ).click(function( event ) {
+    var data = {"temp": thermostat.temp, "savingMode": thermostat.savingMode, "city": $('#city').text() }
+    $.post( "/", data, function(data) {
+      alert("Settings saved")
+    })
+  });
 
 });
