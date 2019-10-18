@@ -1,16 +1,29 @@
 $( document ).ready(function() {
   thermostat = new Thermostat();
+  var weatherIcons = {
+    "clear sky": "01d.png",
+    "few clouds": "02d.png",
+    "scattered clouds": "03d.png",
+    "broken clouds": "04d.png",
+    "overcast clouds": "04d.png",
+    "shower rain": "09d.png",
+    "rain": "10d.png",
+    "moderate rain": "10d.png",
+    "light rain": "10d.png",
+    "thunderstorm": "11d.png",
+    "snow": "13d.png",
+    "mist": "50d.png"}
   displayWeather('London')
 
   usageColour = function() {
     if (thermostat.energyUsage() === "medium-usage") {
-      return $(".card-header").removeClass("bg-success").removeClass("bg-danger").addClass("bg-warning");
+      return $("#text-temperature").removeClass("text-success").removeClass("text-danger").addClass("text-warning");
     }
     else if (thermostat.energyUsage() === "low-usage") {
-      return $(".card-header").removeClass("bg-warning").addClass("bg-success");
+      return $("#text-temperature").removeClass("text-warning").addClass("text-success");
     }
     else {
-      return $(".card-header").removeClass("bg-warning").addClass("bg-danger");
+      return $("#text-temperature").removeClass("text-warning").addClass("text-danger");
     }
   };
 
@@ -72,9 +85,15 @@ $( document ).ready(function() {
     var token = "&appid=5197ed8e832ba1cca4f7a3461daa9de9"
     var units = "&units=metric"
     $.get( url + token + units, function( data ) {
+      var icon = weatherIcons[data.weather[0]['description']]
+      var weather = (data.weather[0]['main'])
       $( "#city" ).text( 'Current temperature in ' + city );
       $( "#current-temperature" ).text( data.main.temp );
+      $( "#main-weather" ).text( weather );
+      $("#icons").attr("src", "http://openweathermap.org/img/wn/" + icon)
     });
   };
+
+
 
 });

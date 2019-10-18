@@ -1,42 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <rel="stylesheet" src="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap.css">
-<style>
-  #saving-mode-on-btn.bg-info, #saving-mode-off-btn.bg-info {
-    color: white
-  }
-</style>
+    <link rel="stylesheet" href="thermostat.css">
   </head>
   <body>
     <div class="container">
       <div class="card mb-3">
-        <div class="card-header border-info bg-warning">
-          Thermostat temperature: <span id="temperature"></span> degrees
+        <div class="card-header text-center border-info">
+          <h1>Thermostat</h1>
         </div>
-          <div class="card-body bg-light">
-            <button id="increase-btn" class="btn btn-outline-info up">Increase</button>
-            <button id="decrease-btn"class="btn btn-outline-info down">Decrease</button>
-            <button id="reset-btn" class="btn btn-outline-info down">Reset</button>
-            <br><br>
-            Power saving mode is <span id="power-saving-status"></span>
-            <button id="saving-mode-on-btn"class="btn btn-outline-info down">PSM On</button>
-            <button id="saving-mode-off-btn" class="btn btn-outline-info down">PSM Off</button>
+        <div class="card-body bg-light">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <div class="text-center">
+                  <div class="text-center">
+                    Temperature
+                  </div>
+                  <button id="increase-btn" class="btn btn-outline-info up">Increase</button>
+                  <button id="decrease-btn"class="btn btn-outline-info down">Decrease</button>
+                  <button id="reset-btn" class="btn btn-outline-info down">Reset</button>
+                </div>
+                  <div class="card-body text-center">
+                    Power saving mode is <span id="power-saving-status"></span>
+                    <div>
+                      <button id="saving-mode-on-btn"class="btn btn-outline-info down">PSM On</button>
+                      <button id="saving-mode-off-btn" class="btn btn-outline-info down">PSM Off</button>
+                    </div>
+                  </div>
+
+              </div>
+              <div class="col-sm text-center">
+                <div class="text-warning" id="text-temperature">
+                  <div class="temp-text" id="text"><span id="temperature"></span>°</div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="container">
       <div class="card mb-3">
-        <div class="card-header">
-          <form id="select-city">
-            <input id="current-city" type="text" placeholder="Enter a city"></input>
-            <input type="submit"></input>
-          </form>
+        <div class="card-header city border-info">
+          <div class="row">
+            <div class="col-sm" id="curr-temp">
+              <span id="city"></span>
+              <span id="current-temperature"></span>
+            </div>
+            <div class="col-sm text-center bg-info" id="weather">
+              <span id="main-weather"></span>
+              <img id="icons" src="">
+            </div>
+        </div>
         </div>
           <div class="card-body bg-light">
-            <span id="city"></span>
-            <span id="current-temperature"></span>
+            <form id="select-city" >
+              <input id="current-city" type="text" placeholder="Enter a city"></input>
+              <input type="submit" class="btn btn-outline-info"></input>
+            </form>
           </div>
       </div>
     </div>

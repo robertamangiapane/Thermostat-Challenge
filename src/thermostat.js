@@ -2,7 +2,6 @@ function Thermostat(){
   this.temp = 20;
   this.min = 10
   this.savingMode = true
-  // this.tempMax = this._max
 };
 
 Thermostat.prototype.increase = function() {

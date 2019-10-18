@@ -1,0 +1,23 @@
+#saving-mode-on-btn.bg-info, #saving-mode-off-btn.bg-info {
+  color: white
+}
+
+#text.temp-text {
+  font-size: 7rem;
+}
+
+#curr-temp {
+  font-size: 2rem
+}
+
+#weather.col-sm {
+  font-size: 2rem
+}
+
+#icons {
+  width: 150
+}
+
+#main-weather {
+  color: white
+}
